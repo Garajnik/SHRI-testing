@@ -26,13 +26,17 @@ describe("Dropzone", () => {
     expect(screen.getByText("Можно загружать только *.csv файлы")).toBeInTheDocument();
   })
 
-  it("Показывает имя текст о загрузке, при корректной загрузке файла", () => {
+  it("Показывает кнопку для отправки, если файл был успешно загружен", () => {
     const file = new File(['report'], 'report.csv', { type: 'text/csv' })
     render(<Dropzone file={file} status="idle" error={null} onFileSelect={() => { }} onClear={() => { }} />)
 
     const input = screen.getByTestId("dropinput");
     fireEvent.change(input, { target: { files: [file] } })
 
+
     expect(screen.getByText("файл загружен!")).toBeInTheDocument();
   })
 })
+
+
+
